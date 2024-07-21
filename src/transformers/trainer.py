@@ -1787,7 +1787,8 @@ class Trainer:
 
                     if real_output is None:
                         raise ValueError("Something went wrong, the output of the model shouldn't be `None`")
-                    xs.mark_sharding(real_output, mesh, ("fsdp", None, None))
+                    partition_spec = ("fsdp", None)
+                    xs.mark_sharding(real_output, mesh, partition_spec)
 
                 self.model = model = FSDPv2(
                     model,
