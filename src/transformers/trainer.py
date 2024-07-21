@@ -1779,6 +1779,11 @@ class Trainer:
                         real_output = output[0]
                     elif isinstance(output, CausalLMOutputWithPast):
                         real_output = output.logits
+                    else:
+                        try:
+                            real_output = output.logits
+                        except Exception as err:
+                            print(err)
 
                     if real_output is None:
                         raise ValueError("Something went wrong, the output of the model shouldn't be `None`")
